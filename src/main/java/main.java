@@ -1,7 +1,7 @@
 class Main {
 
     public static int add(int a, int b) {
-        return a + b;
+        return b + a;
     }
 
     public static void main(String[] args) {
