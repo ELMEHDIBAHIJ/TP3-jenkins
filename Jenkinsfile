@@ -36,8 +36,12 @@ pipeline{
            
           stage('Deploy (Local Docker)') 
            { steps
-            { bat 
-            ''' docker stop $CONTAINER_NAME || true docker rm $CONTAINER_NAME || true docker run -d \ --name $CONTAINER_NAME \ -p ${HOST_PORT}:${CONTAINER_PORT} \ $IMAGE_NAME 
+            {
+            bat ''' 
+            docker stop $CONTAINER_NAME || true docker rm $CONTAINER_NAME || true docker run -d \
+             --name $CONTAINER_NAME \
+              -p ${HOST_PORT}:${CONTAINER_PORT} \
+               $IMAGE_NAME 
             '''
             } 
             }
