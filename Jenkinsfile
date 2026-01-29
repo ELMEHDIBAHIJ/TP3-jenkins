@@ -30,7 +30,7 @@ pipeline{
     stage('Docker Build')
      { steps 
          { 
-        bat 'docker build -t $IMAGE_NAME .' 
+        bat 'docker build -t ${IMAGE_NAME} .' 
          }
          }
            
@@ -38,10 +38,10 @@ pipeline{
            { steps
             {
             bat ''' 
-            docker stop $CONTAINER_NAME || true docker rm $CONTAINER_NAME || true docker run -d \
-             --name $CONTAINER_NAME \
+            docker stop ${CONTAINER_NAME} || true docker rm {CONTAINER_NAME} || true docker run -d \
+             --name ${CONTAINER_NAME} \
               -p ${HOST_PORT}:${CONTAINER_PORT} \
-               $IMAGE_NAME 
+               ${IMAGE_NAME} 
             '''
             } 
             }
@@ -52,7 +52,8 @@ pipeline{
            post 
               { 
                 success 
-                { echo "✅ Déploiement local terminé" } failure 
+                { echo "✅ Déploiement local terminé" } 
+                failure 
                 { echo "❌ Erreur dans le pipeline" }
                 }
                }
