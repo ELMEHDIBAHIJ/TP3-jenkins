@@ -4,10 +4,10 @@ pipeline{
         git 'default'
     }
   environment { 
-  IMAGE_NAME = "tp3-java-app:latest" 
-  CONTAINER_NAME = "tp3-java-container" 
-  HOST_PORT = "8081" 
-  CONTAINER_PORT = "8080" 
+  set IMAGE_NAME = "tp3-java-app:latest" 
+  set CONTAINER_NAME = "tp3-java-container" 
+  set HOST_PORT = "8081" 
+  set CONTAINER_PORT = "8080" 
   } 
   stages { 
     stage('Checkout') { 
@@ -42,7 +42,9 @@ pipeline{
            { steps
             {
             bat """ 
-            docker stop ${CONTAINER_NAME} || true docker rm {CONTAINER_NAME} || true docker run -d \
+            docker stop ${CONTAINER_NAME} 2>nul
+             docker rm ${CONTAINER_NAME} 2>nul
+              docker run -d \
              --name ${CONTAINER_NAME} \
               -p ${HOST_PORT}:${CONTAINER_PORT} \
                ${IMAGE_NAME} 
