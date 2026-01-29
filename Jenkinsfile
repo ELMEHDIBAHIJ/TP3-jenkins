@@ -1,7 +1,7 @@
 pipeline{
   agent any 
   tools {
-        git 'Default'
+        git 'default'
     }
   environment { 
   IMAGE_NAME = "tp3-java-app:latest" 
