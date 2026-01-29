@@ -4,10 +4,10 @@ pipeline{
         git 'default'
     }
   environment { 
-  set IMAGE_NAME = "tp3-java-app:latest" 
-  set CONTAINER_NAME = "tp3-java-container" 
-  set HOST_PORT = "8081" 
-  set CONTAINER_PORT = "8080" 
+   IMAGE_NAME = "tp3-java-app:latest" 
+   CONTAINER_NAME = "tp3-java-container" 
+   HOST_PORT = "8081" 
+   CONTAINER_PORT = "8080" 
   } 
   stages { 
     stage('Checkout') { 
