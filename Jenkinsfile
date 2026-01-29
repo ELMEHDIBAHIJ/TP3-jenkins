@@ -16,12 +16,12 @@ pipeline{
 
     stage('Build') { 
       steps {
-         bat 'mvn -B clean package -DskipTests' 
+         bat "mvn -B clean package -DskipTests" 
          } 
     }
     stage('Test') { 
       steps { 
-        bat 'mvn -B test' 
+        bat "mvn -B test"
       } 
       post { 
         always { junit '**/target/surefire-reports/*.xml' } 
@@ -30,19 +30,19 @@ pipeline{
     stage('Docker Build')
      { steps 
          { 
-        bat 'docker build -t ${IMAGE_NAME} .' 
+        bat "docker build -t ${IMAGE_NAME} ." 
          }
          }
            
           stage('Deploy (Local Docker)') 
            { steps
             {
-            bat ''' 
+            bat """ 
             docker stop ${CONTAINER_NAME} || true docker rm {CONTAINER_NAME} || true docker run -d \
              --name ${CONTAINER_NAME} \
               -p ${HOST_PORT}:${CONTAINER_PORT} \
                ${IMAGE_NAME} 
-            '''
+            """
             } 
             }
             
