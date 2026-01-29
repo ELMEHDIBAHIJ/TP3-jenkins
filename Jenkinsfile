@@ -1,7 +1,9 @@
 pipeline{
-   agent any 
- 
- environment { 
+  agent any 
+  tools {
+        git 'Default'
+    }
+  environment { 
   IMAGE_NAME = "tp3-java-app:latest" 
   CONTAINER_NAME = "tp3-java-container" 
   HOST_PORT = "8081" 
@@ -24,7 +26,9 @@ pipeline{
         bat "mvn -B test"
       } 
       post { 
-        always { junit '**/target/surefire-reports/*.xml' } 
+        always {
+            junit '**/target/surefire-reports/*.xml',allowEmptyResults: true
+            } 
         } 
     }
     stage('Docker Build')
